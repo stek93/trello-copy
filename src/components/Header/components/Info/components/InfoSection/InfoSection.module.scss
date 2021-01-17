@@ -1,0 +1,99 @@
+@import '../../../../../../static/scss/globals';
+
+.info_section {
+	width: 385px;
+	height: 380px;
+	padding: 12px;
+	position: absolute;
+	border-radius: 3px;
+	font-size: 14px;
+	line-height: 20px;
+	top: 44px;
+	right: 8px;
+	color: $dark-gray;
+	cursor: default;
+	box-shadow: 0 8px 16px -4px rgba($darkest-blue, 0.25), 0 0 0 1px rgba($darkest-blue, 0.08);
+
+	header {
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-bottom: 1px solid rgba($darkest-blue, 0.13);
+		position: relative;
+		margin-bottom: 8px;
+
+		h3 {
+			flex: 1;
+			font-weight: 500;
+			text-align: center;
+		}
+	}
+}
+
+.icon_wrapper {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	top: 8px;
+	right: 0;
+
+	svg {
+		width: 16px !important;
+		height: 16px !important;
+		cursor: pointer;
+		path {
+			fill: $dark-gray;
+		}
+	}
+}
+
+.main {
+	width: 100%;
+	padding: 0 12px 12px;
+	border-radius: 3px;
+}
+
+.author_info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 8px;
+
+	h3 {
+		padding: 8px;
+		text-align: center;
+	}
+}
+
+.info_image {
+	width: 100%;
+	border-radius: 3px;
+}
+
+.socials {
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.linkedin {
+	background-color: $primary-blue;
+	margin-right: 32px;
+}
+
+.github {
+	background-color: $black;
+}
