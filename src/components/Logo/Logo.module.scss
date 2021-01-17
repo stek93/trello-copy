@@ -1,0 +1,36 @@
+@import '../../static/scss/globals';
+
+.logo {
+	width: 100%;
+	height: 32px;
+	cursor: pointer;
+	color: $secondary-blue;
+	opacity: 0.5;
+	position: relative;
+
+	&_static {
+		height: 100%;
+	}
+
+	&:hover {
+		opacity: 1;
+
+		.logo_interactive {
+			display: block;
+		}
+	}
+
+	&_interactive {
+		display: none;
+		height: 18px;
+		position: absolute;
+		left: 4px;
+		top: 7px;
+		background-color: $primary-blue;
+		border-radius: 3px;
+
+		img {
+			height: 100%;
+		}
+	}
+}

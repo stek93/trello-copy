@@ -1,0 +1,52 @@
+{
+	"env": {
+		"browser": true,
+		"es2020": true
+	},
+	"parser": "babel-eslint",
+	"extends": ["airbnb", "prettier", "prettier/react"],
+	"plugins": ["react", "prettier", "jest"],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"rules": {
+		"prettier/prettier": ["error"],
+		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+		"react/prop-types": 0,
+		"react/prefer-stateless-function": 0,
+		"jsx-a11y/label-has-for": [
+			2,
+			{
+				"components": ["Label"],
+				"required": {
+					"some": ["nesting", "id"]
+				},
+				"allowChildren": false
+			}
+		],
+		"jsx-a11y/anchor-is-valid": [
+			"error",
+			{
+				"components": ["Link"],
+				"specialLink": ["hrefLeft", "hrefRight"],
+				"aspects": ["invalidHref", "preferButton"]
+			}
+		],
+		"react/jsx-fragments": [0],
+		"jsx-a11y/label-has-associated-control": 0,
+		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+		"no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": false }],
+		"jest/no-disabled-tests": "warn",
+		"jest/no-focused-tests": "error",
+		"jest/no-identical-title": "error",
+		"jest/prefer-to-have-length": "warn",
+		"jest/valid-expect": "error",
+		"react/jsx-props-no-spreading": "off",
+		"camelcase": 0,
+		"no-param-reassign": 0
+	}
+}

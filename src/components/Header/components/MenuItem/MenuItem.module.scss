@@ -1,0 +1,29 @@
+@import '../../../../static/scss/globals';
+
+.item {
+	height: 32px;
+	width: 32px;
+	background-color: rgba($white, 0.3);
+	color: $white;
+	margin-right: 4px;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba($white, 0.2);
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+	}
+
+	svg {
+		path {
+			fill: $white;
+		}
+	}
+}

@@ -1,0 +1,28 @@
+@import '../../../../static/scss/globals';
+
+.boards {
+	width: unset;
+}
+
+.button_container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: inherit;
+	border-radius: inherit;
+	color: inherit;
+	outline: none;
+	border: none;
+	cursor: pointer;
+
+	span {
+		display: flex;
+		align-items: center;
+		font-weight: 600;
+	}
+}
+
+.label {
+	margin-left: 6px;
+}
