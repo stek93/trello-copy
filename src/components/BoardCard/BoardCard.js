@@ -27,7 +27,7 @@ export default function BoardCard({ board, isNewCard, onNewCardClick }) {
 				</div>
 			) : (
 				<div className={classBoardCard} style={styleBoardCard}>
-					<Link to={`/board/${board.slug}`}>
+					<Link to={`/board/${board.id}`}>
 						<div className={styles.overlay} />
 						<span>{board.name}</span>
 					</Link>

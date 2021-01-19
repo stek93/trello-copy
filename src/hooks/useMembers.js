@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userData as userDataAction } from 'state/members/actions';
-import { getUserData } from 'utils/services';
+import { getUserData as getUserDataService } from 'utils/services';
 
 import useFetch from './useFetch';
 
@@ -14,7 +14,7 @@ const useMembers = () => {
 
 	const loadUserData = () => {
 		fetch(
-			getUserData,
+			getUserDataService,
 			null,
 			({ data }) => dispatch(userDataAction(data)),
 			err => dispatch(userDataAction(err))

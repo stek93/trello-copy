@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import useMembers from 'hooks/useMembers';
 
 import BoardList from '../BoardList';
+import Board from '../Board';
 import styles from './Main.module.scss';
 
 export default function Main() {
@@ -18,6 +19,9 @@ export default function Main() {
 			<Switch>
 				<Route exact path='/'>
 					<BoardList />
+				</Route>
+				<Route path='/board/:id'>
+					<Board />
 				</Route>
 			</Switch>
 		</main>

@@ -5,7 +5,7 @@ import useMembers from 'hooks/useMembers';
 
 import BoardCard from 'components/BoardCard';
 import EmptyBoardCard from 'components/EmptyBoardCard';
-import AddNewBoard from 'components/AddNewBoard/AddNewBoard';
+import AddNewBoard from 'components/AddNewBoard';
 
 import styles from './BoardList.module.scss';
 
@@ -16,7 +16,7 @@ export default function BoardList() {
 	const [showNewBoard, setShowNewBoard] = useState(false);
 
 	useEffect(() => {
-		if (userExists) fetchBoards(user.id);
+		if (userExists) fetchBoards();
 	}, [user]);
 
 	return (
