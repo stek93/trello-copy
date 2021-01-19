@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { ReactComponent as HomeIcon } from '../../static/img/icon-home.svg';
+import { ReactComponent as HomeIcon } from 'static/img/icon-home.svg';
 import MenuItem from './components/MenuItem';
 import SearchField from './components/SearchField';
 import Boards from './components/Boards';

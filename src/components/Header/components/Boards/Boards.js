@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 
-import { ReactComponent as BoardsIcon } from '../../../../static/img/icon-boards.svg';
+import { ReactComponent as BoardsIcon } from 'static/img/icon-boards.svg';
 
 import MenuItem from '../MenuItem';
 import styles from './Boards.module.scss';

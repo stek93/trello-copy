@@ -1,16 +1,13 @@
 import React from 'react';
 
-import Header from './components/Header';
-import SideBar from './components/SideBar';
+import Header from 'components/Header';
+import Main from 'components/Main';
 
 function App() {
 	return (
 		<>
 			<Header />
-			<div>
-				<SideBar />
-				<main>LISTA BOARD-ova</main>
-			</div>
+			<Main />
 		</>
 	);
 }

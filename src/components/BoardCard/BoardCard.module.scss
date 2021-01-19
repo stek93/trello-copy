@@ -1,0 +1,54 @@
+@import '../../static/scss/globals';
+
+.card {
+	width: 200px;
+	height: 100px;
+	padding: 8px;
+	color: $white;
+	border-radius: 3px;
+	font-size: 16px;
+	font-weight: 600;
+	position: relative;
+	background-color: rgba($darkest-blue, 0.04);
+	cursor: pointer;
+
+	span {
+		position: absolute;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	&:hover {
+		.overlay {
+			display: block;
+		}
+	}
+}
+
+.overlay {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba($black, 0.1);
+}
+
+.new_card {
+	span {
+		color: $secondary-blue;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-weight: 400;
+		font-size: 14px;
+	}
+}

@@ -20,6 +20,14 @@
 		}
 	}
 
+	&_loader {
+		opacity: 1;
+
+		.logo_interactive {
+			display: block;
+		}
+	}
+
 	&_interactive {
 		display: none;
 		height: 18px;
