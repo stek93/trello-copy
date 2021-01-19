@@ -48,5 +48,13 @@
 		"react/jsx-props-no-spreading": "off",
 		"camelcase": 0,
 		"no-param-reassign": 0
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"paths": ["src"],
+				"extensions": [".js", ".jsx"]
+			}
+		}
 	}
 }

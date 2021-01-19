@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import store from 'state/store';
 import reportWebVitals from './reportWebVitals';
 
 import App from './App';
-
-import store from './state/store';
 
 import './index.scss';
 

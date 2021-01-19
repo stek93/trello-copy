@@ -1,3 +1,6 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({});
+import members from './members/reducer';
+import boards from './boards/reducer';
+
+export default combineReducers({ members, boards });

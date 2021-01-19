@@ -1,0 +1,35 @@
+@import '../../static/scss/globals';
+
+.container {
+	width: 420px;
+	background-color: $white;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba($darkest-blue, 0.25), 0 0 0 1px rgba($darkest-blue, 0.08);
+	margin: 0 auto;
+}
+
+.image {
+	background-color: $sand;
+	background-image: url('https://a.trellocdn.com/prgb/dist/images/home/orientation/no-content.e25c676458c1f4cb280b.svg');
+	background-position: center;
+	height: 108px;
+}
+
+.additional {
+	padding: 16px;
+
+	h3 {
+		width: 100%;
+		text-align: center;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	p {
+		width: 100%;
+		font-size: 14px;
+		line-height: 20px;
+		margin: 10px 0;
+	}
+}

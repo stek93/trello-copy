@@ -1,0 +1,16 @@
+.board_list {
+	width: 100%;
+	padding: 64px;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 200px);
+	justify-items: center;
+	gap: 16px;
+}
+
+.empty_container {
+	display: flex;
+	justify-content: center;
+}

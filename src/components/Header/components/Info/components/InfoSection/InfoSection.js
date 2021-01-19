@@ -1,9 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { ReactComponent as CloseIcon } from '../../../../../../static/img/icon-close.svg';
-import { ReactComponent as LinkedinIcon } from '../../../../../../static/img/icon-linkedin.svg';
-import { ReactComponent as GithubIcon } from '../../../../../../static/img/icon-github.svg';
+import { ReactComponent as CloseIcon } from 'static/img/icon-close.svg';
+import { ReactComponent as LinkedinIcon } from 'static/img/icon-linkedin.svg';
+import { ReactComponent as GithubIcon } from 'static/img/icon-github.svg';
 
 import styles from './InfoSection.module.scss';
 
