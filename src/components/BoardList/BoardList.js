@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useBoards from 'hooks/useBoards';
 import useMembers from 'hooks/useMembers';
 
 import BoardCard from 'components/BoardCard';
 import EmptyBoardCard from 'components/EmptyBoardCard';
+import AddNewBoard from 'components/AddNewBoard/AddNewBoard';
 
 import styles from './BoardList.module.scss';
 
 export default function BoardList() {
 	const { fetchBoards, boards } = useBoards();
 	const { user, userExists } = useMembers();
+
+	const [showNewBoard, setShowNewBoard] = useState(false);
 
 	useEffect(() => {
 		if (userExists) fetchBoards(user.id);
@@ -22,15 +25,18 @@ export default function BoardList() {
 				{boards.length > 0 && (
 					<>
 						{boards.map(board => (
-							<BoardCard board={board} />
+							<BoardCard key={board.id} board={board} />
 						))}
-						<BoardCard isNewCard />
+						<BoardCard
+							key='empty'
+							isNewCard
+							onNewCardClick={() => setShowNewBoard(true)}
+						/>
 					</>
 				)}
 			</div>
-			<div className={styles.empty_container}>
-				{boards.length === 0 && <EmptyBoardCard />}
-			</div>
+			<div className={styles.empty_container}>{!boards.length && <EmptyBoardCard />}</div>
+			{showNewBoard && <AddNewBoard close={() => setShowNewBoard(false)} />}
 		</div>
 	);
 }
