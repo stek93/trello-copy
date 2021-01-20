@@ -3,8 +3,6 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 
-import useMembers from 'hooks/useMembers';
-
 import styles from './Logo.module.scss';
 
 const LOGO_LINK =
@@ -21,9 +19,7 @@ const LogoDefaultProps = {
 	className: ''
 };
 
-export default function Logo({ className }) {
-	const { isLoading } = useMembers();
-
+export default function Logo({ className, isLoading }) {
 	const classLogo = cn({
 		[styles.logo]: true,
 		[className]: className,

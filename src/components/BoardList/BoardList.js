@@ -10,12 +10,13 @@ import AddNewBoard from 'components/AddNewBoard';
 import styles from './BoardList.module.scss';
 
 export default function BoardList() {
-	const { fetchBoards, boards } = useBoards();
+	const { fetchBoards, initBoardDetails, boards } = useBoards();
 	const { user, userExists } = useMembers();
 
 	const [showNewBoard, setShowNewBoard] = useState(false);
 
 	useEffect(() => {
+		initBoardDetails();
 		if (userExists) fetchBoards();
 	}, [user]);
 
