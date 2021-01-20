@@ -11,7 +11,7 @@ export const postBoard = params => service.post(`boards?${qs.stringify(params)}`
 export const getBoards = ({ userID }) => service.get(`members/${userID}/boards`);
 export const getBoard = ({ boardID }) => service.get(`boards/${boardID}`);
 export const getBoardDetailsBatch = ({ boardID }) =>
-	service.get(`batch/?urls=/boards/${boardID},/boards/${boardID}/lists`);
+	service.get(`batch/?urls=/boards/${boardID},/boards/${boardID}/lists,/boards/${boardID}/cards`);
 // ----------------------
 
 // BATCH service

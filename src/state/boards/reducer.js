@@ -12,7 +12,7 @@ const initialState = {
 		name: null,
 		backgroundColor: null,
 		backgroundImage: null,
-		lists: []
+		lists: {}
 	}
 };
 
@@ -43,10 +43,11 @@ const fetchedBoardDetails = handleActions(
 	{
 		[ActionTypes.GET_BOARD]: (state, action) => {
 			const { payload, error = null } = action;
-			const [req1, req2] = payload;
+			const [req1, req2, req3] = payload;
 
 			const board = Object.values(req1)[0];
 			const lists = Object.values(req2)[0];
+			const cards = Object.values(req3)[0];
 
 			return produce(state, draft => {
 				if (!error) {
@@ -55,11 +56,25 @@ const fetchedBoardDetails = handleActions(
 					draft.board.name = board.name;
 					draft.board.backgroundColor = board.prefs?.backgroundColor || '';
 					draft.board.backgroundImage = board.prefs?.backgroundImage || '';
-					draft.board.lists = lists.map(list => ({
-						id: list.id,
-						name: list.name,
-						position: list.pos
-					}));
+					const listsObj = {};
+					lists.forEach(list => {
+						listsObj[list.id] = {
+							id: list.id,
+							name: list.name,
+							position: list.pos,
+							cards: []
+						};
+					});
+
+					draft.board.lists = listsObj;
+					cards.forEach(card => {
+						draft.board.lists[card.idList].cards.push({
+							id: card.id,
+							description: card.desc,
+							name: card.name,
+							position: card.pos
+						});
+					});
 				}
 
 				draft.error = error;

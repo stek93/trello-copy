@@ -28,8 +28,8 @@ export default function Board() {
 				<button type='button'>NESTO</button>
 			</div>
 			<div className={styles.list_container}>
-				{boardDetails.lists.map(list => (
-					<CardList name={list.name} />
+				{Object.values(boardDetails.lists).map(list => (
+					<CardList key={list.id} name={list.name} cards={list.cards} />
 				))}
 			</div>
 		</div>
