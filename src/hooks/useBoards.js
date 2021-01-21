@@ -8,7 +8,10 @@ import {
 import {
 	getBoards as getBoardsService,
 	postBoard as postBoardService,
-	getBoardDetailsBatch as getBoardDetailsService
+	getBoardDetailsBatch as getBoardDetailsService,
+	putBoard as putBoardService,
+	postList as postListService,
+	putList as putListService
 } from 'utils/services';
 
 import useFetch from './useFetch';
@@ -49,11 +52,38 @@ const useBoards = () => {
 
 	const initBoardDetails = () => dispatch(initBoardAction());
 
+	const updateBoard = (boardId, data) =>
+		fetch(
+			putBoardService,
+			{ boardID: boardId, data },
+			() => loadBoardById(boardId),
+			err => console.log(err)
+		);
+
+	const createBoardList = (boardId, data) =>
+		fetch(
+			postListService,
+			{ boardID: boardId, data },
+			() => loadBoardById(boardId),
+			err => console.log(err)
+		);
+
+	const updateBoardList = (boardId, listId, data) =>
+		fetch(
+			putListService,
+			{ listID: listId, data },
+			() => loadBoardById(boardId),
+			err => console.log(err)
+		);
+
 	return {
 		fetchBoards,
 		createNewBoard,
 		loadBoardById,
 		initBoardDetails,
+		updateBoard,
+		createBoardList,
+		updateBoardList,
 		isLoading,
 		error,
 		boards,

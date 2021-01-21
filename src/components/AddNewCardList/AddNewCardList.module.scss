@@ -1,25 +1,25 @@
 @import '../../static/scss/globals';
 
-.add_new_card {
+.container {
 	padding-bottom: 8px;
 	color: $darkest-gray;
+
+	&_list {
+		width: 270px;
+		margin: 0 4px;
+		flex: 0 0 auto;
+		border-right: 8px solid transparent;
+	}
 }
 
 .add_new_cta {
 	width: 100%;
-	color: $dark-gray;
 	border-radius: 3px;
 	padding: 8px;
-	background-color: transparent;
 	border: none;
 	display: flex;
 	align-items: center;
 	cursor: pointer;
-
-	&:hover {
-		color: $secondary-blue;
-		background-color: rgba($darkest-blue, 0.08);
-	}
 
 	> div {
 		width: 20px;
@@ -36,7 +36,28 @@
 	}
 }
 
-.compose_card {
+.cta_card {
+	padding-bottom: 4px;
+	color: $dark-gray;
+	background-color: transparent;
+
+	&:hover {
+		color: $secondary-blue;
+		background-color: rgba($darkest-blue, 0.08);
+	}
+}
+
+.cta_list {
+	font-size: 14px;
+	color: $white;
+	font-weight: 400;
+	background-color: rgba($white, 0.24);
+	&:hover {
+		background-color: rgba($white, 0.32);
+	}
+}
+
+.compose_name {
 	background-color: $white;
 	padding: 6px 8px 2px;
 	border-radius: 3px;
@@ -45,14 +66,15 @@
 	font-weight: 400;
 	font-size: 14px;
 	color: $secondary-blue;
+
+	&_list {
+		padding: 0;
+	}
 }
 
-.card_name {
+.entity_name {
 	width: 100%;
-	min-height: 54px;
-	resize: none;
 	border: none;
-	outline: none;
 	font-family: inherit;
 	padding: 0;
 
@@ -62,7 +84,19 @@
 	}
 }
 
-.card_footer {
+.card_name {
+	min-height: 54px;
+	resize: vertical;
+	outline: none;
+}
+
+.list_name {
+	min-height: 36px;
+	border-radius: 3px;
+	padding: 2px 8px 2px;
+}
+
+.footer {
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -98,4 +132,10 @@
 	&:hover {
 		color: $secondary-blue;
 	}
+}
+
+.list_form {
+	border-radius: 3px;
+	padding: 6px 4px 6px;
+	background-color: $dark-white;
 }

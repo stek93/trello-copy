@@ -10,9 +10,17 @@ export const getUserData = () => service.get(`members/me/`);
 export const postBoard = params => service.post(`boards?${qs.stringify(params)}`);
 export const getBoards = ({ userID }) => service.get(`members/${userID}/boards`);
 export const getBoard = ({ boardID }) => service.get(`boards/${boardID}`);
+export const putBoard = ({ boardID, data }) =>
+	service.put(`boards/${boardID}?${qs.stringify(data)}`);
 export const getBoardDetailsBatch = ({ boardID }) =>
 	service.get(`batch/?urls=/boards/${boardID},/boards/${boardID}/lists,/boards/${boardID}/cards`);
 // ----------------------
+
+// LIST related services
+export const postList = ({ boardID, data }) =>
+	service.post(`boards/${boardID}/lists?${qs.stringify(data)}`);
+export const putList = ({ listID, data }) => service.put(`lists/${listID}?${qs.stringify(data)}`);
+// ---------------------
 
 // BATCH service
 export const getBatchData = urls => service.get(`batch/?urls=${urls}`);

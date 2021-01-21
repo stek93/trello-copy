@@ -56,6 +56,7 @@ const fetchedBoardDetails = handleActions(
 					draft.board.name = board.name;
 					draft.board.backgroundColor = board.prefs?.backgroundColor || '';
 					draft.board.backgroundImage = board.prefs?.backgroundImage || '';
+					draft.board.lastListPosition = lists[lists.length - 1].pos;
 					const listsObj = {};
 					lists.forEach(list => {
 						listsObj[list.id] = {
