@@ -1,0 +1,48 @@
+@import '../../static/scss/globals';
+
+.board {
+	width: 100%;
+	height: 100%;
+}
+
+.stripe {
+	height: 48px;
+	width: 100%;
+	padding: 8px;
+}
+
+.list_container {
+	width: auto;
+	height: calc(100% - 48px);
+	overflow-y: hidden;
+	overflow-x: auto;
+	display: flex;
+}
+
+.board_name {
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: 800;
+	border-radius: 3px;
+	line-height: 32px;
+	padding: 0 12px;
+	background-color: rgba($white, 0.25);
+	color: $white;
+	width: fit-content;
+}
+
+.input_name {
+	width: fit-content;
+	background-color: $white;
+	border-radius: 3px;
+	font-weight: 700;
+	padding: 4px 12px;
+	color: $secondary-blue;
+	font-family: inherit;
+	font-size: 18px;
+
+	&:focus {
+		background-color: $white;
+		box-shadow: inset 0 0 0 0.5px $blue;
+	}
+}

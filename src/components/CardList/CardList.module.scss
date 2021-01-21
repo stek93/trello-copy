@@ -1,0 +1,107 @@
+@import '../../static/scss/globals';
+
+.list_wrapper {
+	height: 100%;
+	max-width: 272px;
+	margin: 0 4px;
+	flex: 0 0 auto;
+}
+
+.list_wrapper:first-child {
+	margin-left: 8px;
+}
+
+.list_wrapper:last-child {
+	margin-right: 8px;
+}
+
+.content {
+	background-color: $dark-white;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.list_header {
+	min-height: 20px;
+	padding: 10px 8px;
+	padding-right: 36px;
+}
+
+.overflow_menu {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 32px;
+	height: 32px;
+	border-radius: 3px;
+	color: $darkest-gray;
+	padding: 6px;
+	line-height: 12.5px;
+	text-align: center;
+	cursor: pointer;
+	font-weight: 600;
+
+	&:hover {
+		color: $secondary-blue;
+		background-color: rgba($darkest-blue, 0.08);
+	}
+}
+
+.drag_button {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor: move;
+	width: 28px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		path {
+			fill: $darkest-gray;
+		}
+	}
+
+	&:hover {
+		color: $secondary-blue;
+		svg {
+			path {
+				fill: $darkest-blue;
+			}
+		}
+	}
+}
+
+.list_footer {
+	position: relative;
+	padding: 0 8px;
+	padding-right: 36px;
+}
+
+.list_scroll {
+	padding: 0 8px;
+}
+
+.input_area {
+	width: 100%;
+	min-height: 28px;
+	border: none;
+	background-color: transparent;
+	border-radius: 3px;
+	font-weight: 600;
+	padding: 4px 8px;
+	color: inherit;
+	font-family: inherit;
+	font-size: 14px;
+
+	&:focus {
+		background-color: $white;
+		box-shadow: inset 0 0 0 1px $blue;
+	}
+}

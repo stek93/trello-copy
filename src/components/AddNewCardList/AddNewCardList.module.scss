@@ -1,0 +1,141 @@
+@import '../../static/scss/globals';
+
+.container {
+	padding-bottom: 8px;
+	color: $darkest-gray;
+
+	&_list {
+		width: 270px;
+		margin: 0 4px;
+		flex: 0 0 auto;
+		border-right: 8px solid transparent;
+	}
+}
+
+.add_new_cta {
+	width: 100%;
+	border-radius: 3px;
+	padding: 8px;
+	border: none;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+
+	> div {
+		width: 20px;
+		height: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 4px;
+	}
+
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.cta_card {
+	padding-bottom: 4px;
+	color: $dark-gray;
+	background-color: transparent;
+
+	&:hover {
+		color: $secondary-blue;
+		background-color: rgba($darkest-blue, 0.08);
+	}
+}
+
+.cta_list {
+	font-size: 14px;
+	color: $white;
+	font-weight: 400;
+	background-color: rgba($white, 0.24);
+	&:hover {
+		background-color: rgba($white, 0.32);
+	}
+}
+
+.compose_name {
+	background-color: $white;
+	padding: 6px 8px 2px;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba($darkest-blue, 0.25);
+	margin-bottom: 8px;
+	font-weight: 400;
+	font-size: 14px;
+	color: $secondary-blue;
+
+	&_list {
+		padding: 0;
+	}
+}
+
+.entity_name {
+	width: 100%;
+	border: none;
+	font-family: inherit;
+	padding: 0;
+
+	&::placeholder {
+		font-weight: 400;
+		color: $dark-gray;
+	}
+}
+
+.card_name {
+	min-height: 54px;
+	resize: vertical;
+	outline: none;
+}
+
+.list_name {
+	min-height: 36px;
+	border-radius: 3px;
+	padding: 2px 8px 2px;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	width: 100%;
+
+	button {
+		margin-right: 4px;
+		background-color: $green;
+		border: none;
+		cursor: pointer;
+		color: $white;
+		padding: 6px 12px;
+		border-radius: 3px;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+		transition: 85ms;
+
+		&:hover {
+			background-color: $light-green;
+		}
+	}
+}
+
+.close {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $darkest-gray;
+	cursor: pointer;
+
+	&:hover {
+		color: $secondary-blue;
+	}
+}
+
+.list_form {
+	border-radius: 3px;
+	padding: 6px 4px 6px;
+	background-color: $dark-white;
+}
