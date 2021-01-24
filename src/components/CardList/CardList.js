@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { arrayOf, string, shape, number } from 'prop-types';
 
@@ -6,6 +7,7 @@ import { ReactComponent as DragIcon } from 'static/img/icon-drag.svg';
 
 import useBoards from 'hooks/useBoards';
 
+import Draggable from 'components/Draggable';
 import ListCard from 'components/ListCard/ListCard';
 import { AddNewCard } from 'components/AddNewCardList';
 import styles from './CardList.module.scss';
@@ -27,7 +29,7 @@ const CardListDefaultProps = {
 	cards: []
 };
 
-export default function CardList({ boardId, list }) {
+export default function CardList({ boardId, list, inDropZone, onDragStart, index, ...rest }) {
 	const { updateBoardList } = useBoards();
 
 	const [showOverflowMenu, setShowOverflowMenu] = useState(false);
@@ -35,13 +37,30 @@ export default function CardList({ boardId, list }) {
 
 	const { name, cards } = list;
 
+	const [cardLists, setCardLists] = useState(cards);
+
+	const classCardList = cn({
+		[styles.list_wrapper]: true,
+		[styles.drop_zone_active]: inDropZone
+	});
+
 	const onSubmit = data => {
 		updateBoardList(boardId, list.id, data);
 	};
 
+	const changeCardPosition = (sourceCard, targetCard) => {};
+
 	return (
-		<div className={styles.list_wrapper}>
-			<div className={styles.content}>
+		<div className={classCardList} data-content='droppable-zone' {...rest}>
+			<div
+				className={styles.content}
+				draggable='true'
+				data-content='draggable-content'
+				onDragStart={onDragStart}
+				data-id={list.id}
+				data-index={index}
+				data-pos={list.position}
+			>
 				<div className={styles.list_header}>
 					<form onSubmit={handleSubmit(onSubmit)} onBlur={handleSubmit(onSubmit)}>
 						<input
@@ -61,8 +80,16 @@ export default function CardList({ boardId, list }) {
 					</div>
 				</div>
 				<div className={styles.list_scroll}>
-					{cards.map(card => (
-						<ListCard key={card.id} name={card.name} />
+					{cardLists.map((card, i) => (
+						<Draggable
+							component={ListCard}
+							elements={cardLists}
+							setElements={setCardLists}
+							changeElementPosition={changeCardPosition}
+							key={card.id}
+							card={card}
+							index={i}
+						/>
 					))}
 				</div>
 				<div className={styles.list_footer}>

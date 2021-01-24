@@ -18,7 +18,7 @@ import useFetch from './useFetch';
 
 const useBoards = () => {
 	const dispatch = useDispatch();
-	const { fetch, isLoading, error } = useFetch();
+	const { fetch, fetchAll, isLoading, error } = useFetch();
 	const {
 		boards: { fetchedBoards, fetchedBoardDetails },
 		members: { user }
@@ -34,7 +34,7 @@ const useBoards = () => {
 	};
 
 	const createNewBoard = ({ data, onSuccess }) => {
-		fetch(postBoardService, data, onSuccess, err => console.log(err));
+		fetch(postBoardService, data, onSuccess);
 	};
 
 	const loadBoardById = id => {
@@ -53,28 +53,39 @@ const useBoards = () => {
 	const initBoardDetails = () => dispatch(initBoardAction());
 
 	const updateBoard = (boardId, data) =>
-		fetch(
-			putBoardService,
-			{ boardID: boardId, data },
-			() => loadBoardById(boardId),
-			err => console.log(err)
-		);
+		fetch(putBoardService, { boardID: boardId, data }, () => loadBoardById(boardId));
 
 	const createBoardList = (boardId, data) =>
-		fetch(
-			postListService,
-			{ boardID: boardId, data },
-			() => loadBoardById(boardId),
-			err => console.log(err)
-		);
+		fetch(postListService, { boardID: boardId, data }, () => loadBoardById(boardId));
 
 	const updateBoardList = (boardId, listId, data) =>
-		fetch(
-			putListService,
-			{ listID: listId, data },
-			() => loadBoardById(boardId),
-			err => console.log(err)
+		fetch(putListService, { listID: listId, data }, () => loadBoardById(boardId));
+
+	const moveLists = (boardId, listA, listB) => {
+		const positionTo = listB.pos;
+		const positionFrom = listA.pos;
+
+		listA.pos = positionTo;
+		listB.pos = positionFrom;
+
+		fetchAll(
+			[putListService, putListService],
+			[
+				{
+					listID: listA.id,
+					data: {
+						pos: listA.pos
+					}
+				},
+				{
+					listID: listB.id,
+					data: {
+						pos: listB.pos
+					}
+				}
+			]
 		);
+	};
 
 	return {
 		fetchBoards,
@@ -84,6 +95,7 @@ const useBoards = () => {
 		updateBoard,
 		createBoardList,
 		updateBoardList,
+		moveLists,
 		isLoading,
 		error,
 		boards,
