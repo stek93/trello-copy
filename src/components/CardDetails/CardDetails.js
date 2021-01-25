@@ -15,11 +15,16 @@ import styles from './CardDetails.module.scss';
 
 export default function CardDetails() {
 	const history = useHistory();
-	const { cardId } = useParams();
-	const { loadCardById, cardDetails, cardListDetails } = useBoards();
+	const { cardId, id: boardId } = useParams();
+	const { loadCardById, cardDetails, cardListDetails, updateCard, deleteCard } = useBoards();
 
 	const onSubmit = data => {
-		console.log(data);
+		updateCard(boardId, cardId, data);
+	};
+
+	const cardDelete = () => {
+		deleteCard(boardId, cardId);
+		history.goBack();
 	};
 
 	useEffect(() => {
@@ -62,13 +67,13 @@ export default function CardDetails() {
 					</div>
 					<div className={styles.description_add}>
 						<AddCardDescription
-							description={cardListDetails.description}
+							description={cardDetails.description}
 							onSubmit={onSubmit}
 						/>
 					</div>
 				</div>
 				<div className={styles.actions}>
-					<button type='button' className={styles.delete_button}>
+					<button type='button' className={styles.delete_button} onClick={cardDelete}>
 						Delete card
 					</button>
 				</div>

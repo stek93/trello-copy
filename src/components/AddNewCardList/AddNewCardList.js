@@ -138,6 +138,11 @@ export function AddCardDescription({ onSubmit, description }) {
 		[styles.description_input]: true
 	});
 
+	const onFormSubmit = data => {
+		onSubmit(data);
+		setActiveDescription(false);
+	};
+
 	return (
 		<div className={classAddCardDescription}>
 			{!activeDescription ? (
@@ -150,12 +155,13 @@ export function AddCardDescription({ onSubmit, description }) {
 				</button>
 			) : (
 				<div className={cn(styles.list_form, styles.list_form_description)}>
-					<form onSubmit={handleSubmit(onSubmit)}>
+					<form onSubmit={handleSubmit(onFormSubmit)}>
 						<div className={classInput}>
 							<textarea
 								ref={register}
 								name='desc'
 								type='text'
+								defaultValue={description}
 								className={cn(styles.entity_name, styles.list_name)}
 								placeholder='Add a more detailed description...'
 								autoFocus

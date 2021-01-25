@@ -16,6 +16,7 @@ export default function CommentList() {
 			{cardDetails.comments.map(comment => (
 				<CommentSection
 					key={comment.id}
+					commentId={comment.id}
 					initials={comment.userInitials}
 					name={comment.userName}
 					text={comment.text}

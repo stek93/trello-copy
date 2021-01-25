@@ -55,7 +55,7 @@ export default function EditableField({
 						ref={register}
 						type='text'
 						name={name}
-						size={inputHasSize ? value.length : false}
+						size={inputHasSize ? value.length : undefined}
 						onBlur={() => setFieldFocus(false)}
 						defaultValue={value}
 						className={inputClassName}

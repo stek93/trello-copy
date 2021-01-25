@@ -15,7 +15,12 @@ import {
 	putList as putListService,
 	getCardDetailsBatch as getCardDetailsService,
 	postCard as postCardService,
-	getList as getListService
+	getList as getListService,
+	putCard as putCardService,
+	deleteCard as deleteCardService,
+	createCardComment as createCardCommentService,
+	updateCardComment as updateCardCommentService,
+	deleteCardComment as deleteCardCommentService
 } from 'utils/services';
 
 import useFetch from './useFetch';
@@ -98,9 +103,20 @@ const useBoards = () => {
 
 	const loadCardById = cardId => {
 		fetch(getCardDetailsService, { cardID: cardId }, ({ data }) => {
-			loadListById(data.idList);
+			// TODO: I need to think of more elegant way to do this.
+			loadListById(Object.values(data[0])[0].idList);
 			dispatch(getCardAction(data));
 		});
+	};
+
+	const updateCard = (boardId, cardId, data) =>
+		fetch(putCardService, { cardID: cardId, data }, () => {
+			loadCardById(cardId);
+			loadBoardById(boardId);
+		});
+
+	const deleteCard = (boardId, cardId) => {
+		fetch(deleteCardService, { cardID: cardId }, () => loadBoardById(boardId));
 	};
 
 	const cardDetails = !fetchedCardDetails.error && fetchedCardDetails.card;
@@ -109,6 +125,22 @@ const useBoards = () => {
 
 	const createListCard = (boardId, data) => {
 		fetch(postCardService, data, () => loadBoardById(boardId));
+	};
+
+	const createComment = (cardId, text) => {
+		fetch(createCardCommentService, { cardID: cardId, text }, () => loadCardById(cardId));
+	};
+
+	const updateComment = (cardId, commentId, text) => {
+		fetch(updateCardCommentService, { cardID: cardId, commentID: commentId, text }, () =>
+			loadCardById(cardId)
+		);
+	};
+
+	const deleteComment = (cardId, commentId) => {
+		fetch(deleteCardCommentService, { cardID: cardId, commentID: commentId }, () =>
+			loadCardById(cardId)
+		);
 	};
 
 	return {
@@ -121,7 +153,12 @@ const useBoards = () => {
 		updateBoardList,
 		createListCard,
 		loadCardById,
+		updateCard,
+		deleteCard,
 		moveLists,
+		createComment,
+		updateComment,
+		deleteComment,
 		isLoading,
 		error,
 		boards,

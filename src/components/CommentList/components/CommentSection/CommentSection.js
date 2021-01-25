@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+
+import useBoards from 'hooks/useBoards';
+
+import { ReactComponent as CloseIcon } from 'static/img/icon-close.svg';
 
 import styles from './CommentSection.module.scss';
 
@@ -8,12 +13,27 @@ const CommentSectionDefaultProps = {
 	isEmpty: false
 };
 
-export default function CommentSection({ isEmpty, initials, name, text, onSubmit }) {
-	const { handleSubmit, register } = useForm();
+export default function CommentSection({ isEmpty, commentId, initials, name, text }) {
+	const { handleSubmit, register, watch, reset } = useForm();
+	const { createComment, updateComment, deleteComment } = useBoards();
+	const { cardId } = useParams();
 
 	const [commentFocused, setCommentFocused] = useState(false);
 	const [editComment, setEditComment] = useState(false);
-	const [comment, setComment] = useState('');
+
+	const watchComment = watch('text', '');
+
+	const submitNewComment = data => {
+		createComment(cardId, data);
+		reset({ text: '' });
+		setCommentFocused(false);
+	};
+
+	const submitEditedComment = data => {
+		updateComment(cardId, commentId, data);
+		setEditComment(false);
+	};
+
 	return (
 		<>
 			{isEmpty ? (
@@ -27,39 +47,37 @@ export default function CommentSection({ isEmpty, initials, name, text, onSubmit
 							commentFocused ? styles.input_field_focused : ''
 						)}
 						onFocus={() => setCommentFocused(true)}
-						onBlur={() => setCommentFocused(false)}
 						role='presentation'
 					>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<textarea
-								ref={register}
-								name='text'
-								placeholder='Write a comment...'
-								value={comment}
-								onChange={e => setComment(e.target.value)}
-							/>
+						<form onSubmit={handleSubmit(submitNewComment)}>
+							<textarea ref={register} name='text' placeholder='Write a comment...' />
 							{commentFocused && (
-								<button
-									type='submit'
-									className={cn(
-										styles.save_button,
-										comment.length
-											? styles.save_button_enabled
-											: styles.save_button_disabled
-									)}
-								>
-									Save
-								</button>
+								<div className={styles.actions}>
+									<button
+										type='submit'
+										className={cn(
+											styles.save_button,
+											watchComment.length
+												? styles.save_button_enabled
+												: styles.save_button_disabled
+										)}
+									>
+										Save
+									</button>
+									<div
+										className={styles.close}
+										onClick={() => setCommentFocused(false)}
+										role='presentation'
+									>
+										<CloseIcon />
+									</div>
+								</div>
 							)}
 						</form>
 					</div>
 				</div>
 			) : (
-				<div
-					className={cn(styles.comment, styles.comment_list)}
-					role='presentation'
-					onBlur={() => setEditComment(false)}
-				>
+				<div className={cn(styles.comment, styles.comment_list)}>
 					<div className={styles.user}>
 						<div className={styles.user_initials}>{initials}</div>
 					</div>
@@ -72,7 +90,12 @@ export default function CommentSection({ isEmpty, initials, name, text, onSubmit
 									<span onClick={() => setEditComment(true)} role='presentation'>
 										Edit
 									</span>
-									<span>Delete</span>
+									<span
+										onClick={() => deleteComment(cardId, commentId)}
+										role='presentation'
+									>
+										Delete
+									</span>
 								</div>
 							</div>
 						) : (
@@ -83,26 +106,34 @@ export default function CommentSection({ isEmpty, initials, name, text, onSubmit
 									editComment ? styles.input_field_edit_focused : ''
 								)}
 							>
-								<form onSubmit={handleSubmit(onSubmit)}>
+								<form onSubmit={handleSubmit(submitEditedComment)}>
 									<textarea
 										ref={register}
 										name='text'
 										placeholder='Write a comment...'
 										defaultValue={text}
-										onChange={e => setComment(e.target.value)}
 									/>
 									{editComment && (
-										<button
-											type='submit'
-											className={cn(
-												styles.save_button,
-												text.length
-													? styles.save_button_enabled
-													: styles.save_button_disabled
-											)}
-										>
-											Save
-										</button>
+										<div className={styles.actions}>
+											<button
+												type='submit'
+												className={cn(
+													styles.save_button,
+													watchComment.length
+														? styles.save_button_enabled
+														: styles.save_button_disabled
+												)}
+											>
+												Save
+											</button>
+											<div
+												className={styles.close}
+												onClick={() => setEditComment(false)}
+												role='presentation'
+											>
+												<CloseIcon />
+											</div>
+										</div>
 									)}
 								</form>
 							</div>
