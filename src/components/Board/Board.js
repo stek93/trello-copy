@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, useParams, useRouteMatch, Route } from 'react-router-dom';
+import { Switch, useParams, useRouteMatch, Route, useHistory } from 'react-router-dom';
 
 import useBoards from 'hooks/useBoards';
+
+import { ReactComponent as WarningIcon } from 'static/img/icon-warning.svg';
 
 import { AddNewList } from 'components/AddNewCardList';
 import CardList from 'components/CardList';
@@ -11,9 +13,10 @@ import Draggable from 'components/Draggable';
 import styles from './Board.module.scss';
 
 export default function Board() {
+	const history = useHistory();
 	const { path } = useRouteMatch();
 	const { id } = useParams();
-	const { loadBoardById, boardDetails, updateBoard, moveLists } = useBoards();
+	const { loadBoardById, boardDetails, updateBoard, moveLists, deleteBoard } = useBoards();
 
 	const [boardLists, setBoardLists] = useState([]);
 
@@ -50,6 +53,14 @@ export default function Board() {
 					onSubmit={onSubmit}
 					inputHasSize
 				/>
+				<button
+					type='button'
+					className={styles.delete_button}
+					onClick={() => deleteBoard(id, () => history.goBack())}
+				>
+					<WarningIcon />
+					Delete
+				</button>
 			</div>
 			<div className={styles.list_container}>
 				{boardLists?.map((list, index) => (

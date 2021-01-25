@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { arrayOf, string, shape, number } from 'prop-types';
 
 import { ReactComponent as DragIcon } from 'static/img/icon-drag.svg';
+import { ReactComponent as RemoveIcon } from 'static/img/icon-remove.svg';
 
 import useBoards from 'hooks/useBoards';
 
@@ -30,12 +31,11 @@ const CardListDefaultProps = {
 };
 
 export default function CardList({ boardId, list, inDropZone, onDragStart, index, ...rest }) {
-	const { updateBoardList } = useBoards();
+	const { updateBoardList, archiveList } = useBoards();
 
-	const [showOverflowMenu, setShowOverflowMenu] = useState(false);
 	const { handleSubmit, register } = useForm();
 
-	const { name, cards } = list;
+	const { id, name, cards } = list;
 
 	const [cardLists, setCardLists] = useState(cards);
 
@@ -76,11 +76,11 @@ export default function CardList({ boardId, list, inDropZone, onDragStart, index
 						/>
 					</form>
 					<div
-						className={styles.overflow_menu}
-						onClick={() => setShowOverflowMenu(!showOverflowMenu)}
+						className={cn(styles.button, styles.button_remove)}
+						onClick={() => archiveList(boardId, id)}
 						role='presentation'
 					>
-						...
+						<RemoveIcon />
 					</div>
 				</div>
 				<div className={styles.list_scroll}>
@@ -102,7 +102,7 @@ export default function CardList({ boardId, list, inDropZone, onDragStart, index
 						listId={list.id}
 						isSingleCard={cards?.length <= 1}
 					/>
-					<div className={styles.drag_button}>
+					<div className={cn(styles.button, styles.button_drag)}>
 						<DragIcon />
 					</div>
 				</div>

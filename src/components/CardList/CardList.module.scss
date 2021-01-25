@@ -38,36 +38,23 @@
 	padding-right: 36px;
 }
 
-.overflow_menu {
+.button {
 	position: absolute;
 	top: 4px;
 	right: 4px;
-	width: 32px;
-	height: 32px;
-	border-radius: 3px;
-	color: $darkest-gray;
-	padding: 6px;
-	line-height: 12.5px;
-	text-align: center;
-	cursor: pointer;
-	font-weight: 600;
-
-	&:hover {
-		color: $secondary-blue;
-		background-color: rgba($darkest-blue, 0.08);
-	}
-}
-
-.drag_button {
-	position: absolute;
-	top: 4px;
-	right: 4px;
-	cursor: move;
 	width: 28px;
 	height: 28px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	&_drag {
+		cursor: move;
+	}
+
+	&_remove {
+		cursor: pointer;
+	}
 
 	svg {
 		width: 20px;

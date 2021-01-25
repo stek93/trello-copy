@@ -60,7 +60,6 @@ export default function Draggable({
 
 		setInDropZone(false);
 
-		console.log(sourceItem, targetItem, listCopy);
 		if (sourceItem.index === targetItem.index) return;
 
 		listCopy.current.splice(
