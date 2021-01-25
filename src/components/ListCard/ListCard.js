@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 import styles from './ListCard.module.scss';
 
 export default function ListCard({ card, inDropZone, onDragStart, index, ...rest }) {
+	const { url } = useRouteMatch();
 	const { id, name, position } = card;
+
 	return (
-		<Link to='nnn' className={styles.link}>
+		<Link to={`${url}/card/${id}`} className={styles.link}>
 			<div data-content='droppable-zone' {...rest}>
 				<div
 					className={styles.card}

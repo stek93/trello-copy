@@ -1,3 +1,3 @@
-import { AddNewCard, AddNewList } from './AddNewCardList';
+import { AddNewCard, AddNewList, AddCardDescription } from './AddNewCardList';
 
-export { AddNewCard, AddNewList };
+export { AddNewCard, AddNewList, AddCardDescription };

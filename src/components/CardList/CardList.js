@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import { arrayOf, string, shape, number } from 'prop-types';
@@ -38,6 +38,10 @@ export default function CardList({ boardId, list, inDropZone, onDragStart, index
 	const { name, cards } = list;
 
 	const [cardLists, setCardLists] = useState(cards);
+
+	useEffect(() => {
+		if (cards) setCardLists(cards);
+	}, [cards]);
 
 	const classCardList = cn({
 		[styles.list_wrapper]: true,
@@ -93,7 +97,11 @@ export default function CardList({ boardId, list, inDropZone, onDragStart, index
 					))}
 				</div>
 				<div className={styles.list_footer}>
-					<AddNewCard isSingleCard={cards?.length <= 1} />
+					<AddNewCard
+						boardId={boardId}
+						listId={list.id}
+						isSingleCard={cards?.length <= 1}
+					/>
 					<div className={styles.drag_button}>
 						<DragIcon />
 					</div>

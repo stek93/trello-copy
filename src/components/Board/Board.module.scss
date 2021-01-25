@@ -18,35 +18,3 @@
 	overflow-x: auto;
 	display: flex;
 }
-
-.board_name {
-	cursor: pointer;
-	font-size: 18px;
-	font-weight: 800;
-	border-radius: 3px;
-	line-height: 32px;
-	padding: 0 12px;
-	background-color: rgba($white, 0.25);
-	color: $white;
-	width: fit-content;
-
-	&:hover {
-		background-color: rgba($white, 0.32);
-	}
-}
-
-.input_name {
-	width: fit-content;
-	background-color: $white;
-	border-radius: 3px;
-	font-weight: 700;
-	padding: 4px 12px;
-	color: $secondary-blue;
-	font-family: inherit;
-	font-size: 18px;
-
-	&:focus {
-		background-color: $white;
-		box-shadow: inset 0 0 0 0.5px $blue;
-	}
-}

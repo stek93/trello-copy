@@ -5,13 +5,22 @@ import {
 	getBoard as getBoardAction,
 	getBoardInit as initBoardAction
 } from 'state/boards/actions';
+import { getCard as getCardAction, getCardList as getCardListAction } from 'state/cards/actions';
 import {
 	getBoards as getBoardsService,
 	postBoard as postBoardService,
 	getBoardDetailsBatch as getBoardDetailsService,
 	putBoard as putBoardService,
 	postList as postListService,
-	putList as putListService
+	putList as putListService,
+	getCardDetailsBatch as getCardDetailsService,
+	postCard as postCardService,
+	getList as getListService,
+	putCard as putCardService,
+	deleteCard as deleteCardService,
+	createCardComment as createCardCommentService,
+	updateCardComment as updateCardCommentService,
+	deleteCardComment as deleteCardCommentService
 } from 'utils/services';
 
 import useFetch from './useFetch';
@@ -21,7 +30,8 @@ const useBoards = () => {
 	const { fetch, fetchAll, isLoading, error } = useFetch();
 	const {
 		boards: { fetchedBoards, fetchedBoardDetails },
-		members: { user }
+		members: { user },
+		cards: { fetchedCardDetails, fetchedCardList }
 	} = useSelector(store => store);
 
 	const fetchBoards = () => {
@@ -87,6 +97,52 @@ const useBoards = () => {
 		);
 	};
 
+	const loadListById = listId => {
+		fetch(getListService, { listID: listId }, ({ data }) => dispatch(getCardListAction(data)));
+	};
+
+	const loadCardById = cardId => {
+		fetch(getCardDetailsService, { cardID: cardId }, ({ data }) => {
+			// TODO: I need to think of more elegant way to do this.
+			loadListById(Object.values(data[0])[0].idList);
+			dispatch(getCardAction(data));
+		});
+	};
+
+	const updateCard = (boardId, cardId, data) =>
+		fetch(putCardService, { cardID: cardId, data }, () => {
+			loadCardById(cardId);
+			loadBoardById(boardId);
+		});
+
+	const deleteCard = (boardId, cardId) => {
+		fetch(deleteCardService, { cardID: cardId }, () => loadBoardById(boardId));
+	};
+
+	const cardDetails = !fetchedCardDetails.error && fetchedCardDetails.card;
+
+	const cardListDetails = !fetchedCardList.error && fetchedCardList.list;
+
+	const createListCard = (boardId, data) => {
+		fetch(postCardService, data, () => loadBoardById(boardId));
+	};
+
+	const createComment = (cardId, text) => {
+		fetch(createCardCommentService, { cardID: cardId, text }, () => loadCardById(cardId));
+	};
+
+	const updateComment = (cardId, commentId, text) => {
+		fetch(updateCardCommentService, { cardID: cardId, commentID: commentId, text }, () =>
+			loadCardById(cardId)
+		);
+	};
+
+	const deleteComment = (cardId, commentId) => {
+		fetch(deleteCardCommentService, { cardID: cardId, commentID: commentId }, () =>
+			loadCardById(cardId)
+		);
+	};
+
 	return {
 		fetchBoards,
 		createNewBoard,
@@ -95,10 +151,19 @@ const useBoards = () => {
 		updateBoard,
 		createBoardList,
 		updateBoardList,
+		createListCard,
+		loadCardById,
+		updateCard,
+		deleteCard,
 		moveLists,
+		createComment,
+		updateComment,
+		deleteComment,
 		isLoading,
 		error,
 		boards,
+		cardDetails,
+		cardListDetails,
 		boardDetails
 	};
 };
