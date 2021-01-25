@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, useParams, useRouteMatch, Route } from 'react-router-dom';
 
 import useBoards from 'hooks/useBoards';
@@ -7,12 +7,15 @@ import { AddNewList } from 'components/AddNewCardList';
 import CardList from 'components/CardList';
 import CardDetails from 'components/CardDetails';
 import EditableField from 'components/EditableField';
+import Draggable from 'components/Draggable';
 import styles from './Board.module.scss';
 
 export default function Board() {
 	const { path } = useRouteMatch();
 	const { id } = useParams();
-	const { loadBoardById, boardDetails, updateBoard } = useBoards();
+	const { loadBoardById, boardDetails, updateBoard, moveLists } = useBoards();
+
+	const [boardLists, setBoardLists] = useState([]);
 
 	const styleBoard = {
 		backgroundImage: `url(${boardDetails?.backgroundImage})`,
@@ -26,9 +29,17 @@ export default function Board() {
 		updateBoard(boardDetails.id, data);
 	};
 
+	const changeListPosition = (sourceList, targetList) => {
+		moveLists(id, sourceList, targetList);
+	};
+
 	useEffect(() => {
 		if (id) loadBoardById(id);
 	}, [id]);
+
+	useEffect(() => {
+		if (boardDetails) setBoardLists(Object.values(boardDetails.lists));
+	}, [boardDetails]);
 
 	return (
 		<div className={styles.board} style={styleBoard}>
@@ -41,8 +52,17 @@ export default function Board() {
 				/>
 			</div>
 			<div className={styles.list_container}>
-				{Object.values(boardDetails.lists).map(list => (
-					<CardList key={list.id} boardId={boardDetails.id} list={list} />
+				{boardLists?.map((list, index) => (
+					<Draggable
+						component={CardList}
+						elements={boardLists}
+						setElements={setBoardLists}
+						changeElementPosition={changeListPosition}
+						key={list.id}
+						boardId={boardDetails.id}
+						list={list}
+						index={index}
+					/>
 				))}
 				<AddNewList boardId={id} lastListPosition={boardDetails.lastListPosition} />
 			</div>
