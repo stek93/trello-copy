@@ -62,11 +62,15 @@ export default function CardList({ boardId, list }) {
 				</div>
 				<div className={styles.list_scroll}>
 					{cards.map(card => (
-						<ListCard key={card.id} name={card.name} />
+						<ListCard key={card.id} id={card.id} name={card.name} />
 					))}
 				</div>
 				<div className={styles.list_footer}>
-					<AddNewCard isSingleCard={cards?.length <= 1} />
+					<AddNewCard
+						boardId={boardId}
+						listId={list.id}
+						isSingleCard={cards?.length <= 1}
+					/>
 					<div className={styles.drag_button}>
 						<DragIcon />
 					</div>

@@ -138,4 +138,32 @@
 	border-radius: 3px;
 	padding: 6px 4px 6px;
 	background-color: $dark-white;
+
+	&_description {
+		background-color: transparent;
+	}
+}
+
+.description {
+	width: 95%;
+	margin-top: 8px;
+	&_button {
+		width: 100%;
+		color: $secondary-blue;
+		padding: 8px 12px;
+		background-color: rgba($darkest-blue, 0.04);
+		min-height: 60px;
+		display: flex;
+		align-items: flex-start;
+	}
+
+	&_input {
+		box-shadow: none;
+
+		textarea {
+			padding: 8px 12px;
+			min-height: 100px;
+			resize: none;
+		}
+	}
 }

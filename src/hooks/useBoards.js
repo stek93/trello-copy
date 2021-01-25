@@ -5,13 +5,17 @@ import {
 	getBoard as getBoardAction,
 	getBoardInit as initBoardAction
 } from 'state/boards/actions';
+import { getCard as getCardAction, getCardList as getCardListAction } from 'state/cards/actions';
 import {
 	getBoards as getBoardsService,
 	postBoard as postBoardService,
 	getBoardDetailsBatch as getBoardDetailsService,
 	putBoard as putBoardService,
 	postList as postListService,
-	putList as putListService
+	putList as putListService,
+	getCardDetailsBatch as getCardDetailsService,
+	postCard as postCardService,
+	getList as getListService
 } from 'utils/services';
 
 import useFetch from './useFetch';
@@ -21,7 +25,8 @@ const useBoards = () => {
 	const { fetch, isLoading, error } = useFetch();
 	const {
 		boards: { fetchedBoards, fetchedBoardDetails },
-		members: { user }
+		members: { user },
+		cards: { fetchedCardDetails, fetchedCardList }
 	} = useSelector(store => store);
 
 	const fetchBoards = () => {
@@ -76,6 +81,25 @@ const useBoards = () => {
 			err => console.log(err)
 		);
 
+	const loadListById = listId => {
+		fetch(getListService, { listID: listId }, ({ data }) => dispatch(getCardListAction(data)));
+	};
+
+	const loadCardById = cardId => {
+		fetch(getCardDetailsService, { cardID: cardId }, ({ data }) => {
+			loadListById(data.idList);
+			dispatch(getCardAction(data));
+		});
+	};
+
+	const cardDetails = !fetchedCardDetails.error && fetchedCardDetails.card;
+
+	const cardListDetails = !fetchedCardList.error && fetchedCardList.list;
+
+	const createListCard = (boardId, data) => {
+		fetch(postCardService, data, () => loadBoardById(boardId));
+	};
+
 	return {
 		fetchBoards,
 		createNewBoard,
@@ -84,9 +108,13 @@ const useBoards = () => {
 		updateBoard,
 		createBoardList,
 		updateBoardList,
+		createListCard,
+		loadCardById,
 		isLoading,
 		error,
 		boards,
+		cardDetails,
+		cardListDetails,
 		boardDetails
 	};
 };
