@@ -12,6 +12,7 @@ export const getBoards = ({ userID }) => service.get(`members/${userID}/boards`)
 export const getBoard = ({ boardID }) => service.get(`boards/${boardID}`);
 export const putBoard = ({ boardID, data }) =>
 	service.put(`boards/${boardID}?${qs.stringify(data)}`);
+export const deleteBoard = ({ boardID }) => service.remove(`boards/${boardID}`);
 export const getBoardDetailsBatch = ({ boardID }) =>
 	service.get(`batch/?urls=/boards/${boardID},/boards/${boardID}/lists,/boards/${boardID}/cards`);
 // ----------------------
@@ -21,6 +22,7 @@ export const postList = ({ boardID, data }) =>
 	service.post(`boards/${boardID}/lists?${qs.stringify(data)}`);
 export const putList = ({ listID, data }) => service.put(`lists/${listID}?${qs.stringify(data)}`);
 export const getList = ({ listID }) => service.get(`lists/${listID}`);
+export const archiveList = ({ listID }) => service.put(`lists/${listID}/closed?value=true`);
 // ---------------------
 
 // CARD related services

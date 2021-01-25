@@ -11,8 +11,10 @@ import {
 	postBoard as postBoardService,
 	getBoardDetailsBatch as getBoardDetailsService,
 	putBoard as putBoardService,
+	deleteBoard as deleteBoardService,
 	postList as postListService,
 	putList as putListService,
+	archiveList as archiveListService,
 	getCardDetailsBatch as getCardDetailsService,
 	postCard as postCardService,
 	getList as getListService,
@@ -109,6 +111,9 @@ const useBoards = () => {
 		});
 	};
 
+	const archiveList = (boardId, listId) =>
+		fetch(archiveListService, { listID: listId }, () => loadBoardById(boardId));
+
 	const updateCard = (boardId, cardId, data) =>
 		fetch(putCardService, { cardID: cardId, data }, () => {
 			loadCardById(cardId);
@@ -143,14 +148,23 @@ const useBoards = () => {
 		);
 	};
 
+	const deleteBoard = (boardId, onSuccess) => {
+		fetch(deleteBoardService, { boardID: boardId }, () => {
+			fetchBoards();
+			onSuccess();
+		});
+	};
+
 	return {
 		fetchBoards,
 		createNewBoard,
 		loadBoardById,
 		initBoardDetails,
 		updateBoard,
+		deleteBoard,
 		createBoardList,
 		updateBoardList,
+		archiveList,
 		createListCard,
 		loadCardById,
 		updateCard,
