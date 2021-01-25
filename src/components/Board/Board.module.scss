@@ -29,6 +29,10 @@
 	background-color: rgba($white, 0.25);
 	color: $white;
 	width: fit-content;
+
+	&:hover {
+		background-color: rgba($white, 0.32);
+	}
 }
 
 .input_name {
