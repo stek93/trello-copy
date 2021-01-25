@@ -155,6 +155,10 @@
 		min-height: 60px;
 		display: flex;
 		align-items: flex-start;
+
+		&:hover {
+			background-color: rgba($darkest-blue, 0.04);
+		}
 	}
 
 	&_input {

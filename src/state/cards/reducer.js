@@ -43,7 +43,8 @@ const fetchedCardDetails = handleAction(
 						id: comment.id,
 						text: comment.data.text,
 						date: comment.date,
-						user: comment.memberCreator.initials
+						userInitials: comment.memberCreator.initials,
+						userName: comment.memberCreator.fullName
 					}));
 			}
 

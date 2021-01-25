@@ -10,6 +10,7 @@ import { ReactComponent as CommentsIcon } from 'static/img/icon-comments.svg';
 
 import { AddCardDescription } from 'components/AddNewCardList';
 import EditableField from 'components/EditableField';
+import CommentList from 'components/CommentList';
 import styles from './CardDetails.module.scss';
 
 export default function CardDetails() {
@@ -76,6 +77,9 @@ export default function CardDetails() {
 						<CommentsIcon />
 					</div>
 					<h3>Activity</h3>
+				</div>
+				<div className={styles.description_info}>
+					<CommentList />
 				</div>
 			</div>
 		</div>
